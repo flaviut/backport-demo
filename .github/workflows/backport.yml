@@ -41,6 +41,9 @@ jobs:
           repository: ${{ github.event.pull_request.base.repo.full_name }}
           ref: ${{ github.event.pull_request.base.ref }}
 
+      - name: Normalize historical line endings during backports
+        run: git config --local merge.renormalize true
+
       - name: Create backport pull requests
         uses: korthout/backport-action@66065406958f46e82238fd59546f5a99e69e22aa # v4.5.2
         with:
