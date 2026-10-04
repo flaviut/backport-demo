@@ -5,6 +5,13 @@ The proposed flow worked in GitHub Actions on October 4, 2026.
 created [PR #4](https://github.com/flaviut/backport-demo/pull/4) without
 conflicts. All six backported files contain 11 LF endings and zero CRLF.
 
+The working configuration was introduced in
+[commit 09bd98e](https://github.com/flaviut/backport-demo/commit/09bd98ea92e579b4be6c48bb7a149d150c3e4c69):
+it enables `merge.renormalize=true` before the action and adds the byte-level
+verification. The destination's LF policy and normalization were installed in
+[commit d1e10b2](https://github.com/flaviut/backport-demo/commit/d1e10b246599ab4bde883dfde07d52bb61dc8064).
+Both are needed for the tested flow.
+
 The source was the original merged PR, whose files had CRLF, LF, and mixed
 endings. The destination started at v1.0.0, then received this policy and a
 separate normalization commit:
