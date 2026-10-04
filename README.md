@@ -1,5 +1,8 @@
 # Backport line ending experiment
 
+The attributes plus merge-renormalization follow-up succeeded: see
+[LF backport verification](VERIFICATION.md) for the setup, run, and assertions.
+
 Six Python fixtures: two CRLF, two LF, and two alternating CRLF/LF.
 Git autocrlf is disabled and no attributes normalize the fixtures.
 
