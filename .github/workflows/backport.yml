@@ -1,5 +1,6 @@
 name: Backport
 on:
+  workflow_dispatch:
   pull_request_target:
     types: [closed, labeled]
 permissions:
@@ -7,8 +8,13 @@ permissions:
   pull-requests: write
 jobs:
   backport:
-    if: github.event.pull_request.merged && startsWith(github.event.label.name, 'backport ')
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged && startsWith(github.event.label.name, 'backport '))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - uses: korthout/backport-action@v4
+        with:
+          source_pr_number: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
+          target_branches: ${{ github.event_name == 'workflow_dispatch' && 'release-1.0-lf' || '' }}
+          label_pattern: ${{ github.event_name == 'workflow_dispatch' && '^DISABLED$' || '^backport ([^ ]+)$' }}
+          cherry_picking_merge_mode: ${{ github.event_name == 'workflow_dispatch' && 'whitespace_tolerant' || 'default' }}
