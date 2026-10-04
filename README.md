@@ -1,5 +1,8 @@
 # Backport line ending experiment
 
+See [FreeCAD backport LF verification](VERIFICATION.md) for a controlled
+before-and-after test of the minimal patch to FreeCAD's current workflow.
+
 Six Python fixtures: two CRLF, two LF, and two alternating CRLF/LF.
 Git autocrlf is disabled and no attributes normalize the fixtures.
 
